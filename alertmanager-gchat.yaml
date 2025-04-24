@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-gchat-env
+  namespace: monitoring
+data:
+  GOOGLE_CHAT_WEBHOOK: "https://chat.googleapis.com/v1/spaces/AAAA.../messages?key=...&token=..."
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager-gchat
+  namespace: monitoring
+  labels:
+    app: alertmanager-gchat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alertmanager-gchat
+  template:
+    metadata:
+      labels:
+        app: alertmanager-gchat
+    spec:
+      containers:
+        - name: alertmanager-gchat
+          image: yourdockerhubuser/alertmanager-gchat:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: alertmanager-gchat-env
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alertmanager-gchat
+  namespace: monitoring
+spec:
+  selector:
+    app: alertmanager-gchat
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP

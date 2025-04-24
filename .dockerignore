@@ -1,0 +1,40 @@
+# Ignorar arquivos de ambiente virtual
+venv/
+ENV/
+env/
+.venv/
+
+# Ignorar arquivos e diretórios ocultos
+.*
+!.dockerignore
+!.env  # (remova se você não quiser incluir .env no build)
+
+# Ignorar caches e compilações Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar arquivos de log e temporários
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Ignorar arquivos de teste
+test_*.py
+tests/
+
+# Ignorar arquivos de build e distribuição
+build/
+dist/
+*.egg-info/
+
+# IDEs e editores
+.vscode/
+.idea/
+
+# Arquivos de Kubernetes e Docker locais
+k8s/
+docker-compose.yml
+docker-compose.override.yml

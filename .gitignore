@@ -1,0 +1,47 @@
+# Ambiente virtual
+venv/
+.env
+
+# Bytecode Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários
+*.swp
+*.bak
+*.tmp
+
+# Pytest
+.cache/
+.coverage
+htmlcov/
+
+# Configuração de IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de distribuição
+dist/
+build/
+*.egg-info/
+
+# Docker
+*.tar
+docker-compose.override.yml
+
+# Kubernetes configs locais
+k8s/*.local.yaml
+
+# Arquivos gerados
+*.db
+*.sqlite3
+
+# Exclui arquivos sensíveis por segurança
+secret*.yaml
+*.secret.yaml
