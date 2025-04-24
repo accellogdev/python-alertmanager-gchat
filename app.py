@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 GOOGLE_CHAT_WEBHOOK = os.getenv("GOOGLE_CHAT_WEBHOOK")
 
+@app.route("/", methods=["GET"])
+def health_check():
+    return "OK", 200
+
 @app.route("/", methods=["POST"])
 def alertmanager_webhook():
     data = request.json
